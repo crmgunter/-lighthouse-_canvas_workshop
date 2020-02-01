@@ -22,6 +22,11 @@ window.addEventListener('mousemove', (event) => {
     mouse.y = event.y
 })
 
+window.addEventListener('mouseout', (event) => {
+    mouse.x = undefined
+    mouse.y = undefined
+})
+
 const maxRadius = 50
 
 class Ball {
