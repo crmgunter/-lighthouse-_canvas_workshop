@@ -7,11 +7,29 @@ canvas.height = window.innerHeight
 let gravity = 1
 let bounce = .5
 
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+window.addEventListener('resize', (event) => {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+})
+
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x
+    mouse.y = event.y
+})
+
+const maxRadius = 50
+
 class Ball {
     constructor(x, y, radius, vx, vy, color) {
         this.x = x
         this.y = y
         this.radius = radius
+        this.minRadius = radius
         this.vx = vx
         this.vy = vy
         this.color = color
@@ -33,16 +51,44 @@ class Ball {
             // this.vy = -this.vy * bounce
 
             this.vy = -this.vy
-        } 
+        }
         // else {
-            // this.vy += gravity
+        // this.vy += gravity
         // }
 
-        // console.log(this.vy)
-
-        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+        if (this.x + this.radius + this.vx > canvas.width || this.x - this.radius < 0) {
             this.vx = -this.vx
         }
+
+        if (mouse.x - this.x < 150 && mouse.x - this.x > -150 &&
+            mouse.y - this.y < 150 && mouse.y - this.y > -150) {
+            this.radius += 1
+
+            if (mouse.x > this.x) {
+                this.x += 1
+            }
+
+            if (mouse.x < this.x) {
+                this.x -= 1
+            }
+
+            if (mouse.y > this.y) {
+                this.y += 1
+            }
+
+            if (mouse.y < this.y) {
+                this.y += 1
+            }
+
+            if (this.radius < maxRadius) {
+                this.radius += 1
+            }
+        }
+
+        if (this.radius > this.minRadius) {
+            this.radius -= 1
+        }
+
 
 
 
@@ -63,13 +109,13 @@ const colorArray = [
 const init = () => {
     for (let i = 0; i < 500; i++) {
         const radius = Math.ceil(Math.random() * 15)
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height
-        const vx = (Math.random() -.5) * 8
-        const vy = (Math.random() -.5) * 8
-        console.log(vx, vy)
+        const x = radius + Math.random() * (canvas.width - radius * 2)
+        const y = radius + Math.random() * (canvas.height - radius * 2)
+        const vx = (Math.random() - .5) * 8
+        const vy = (Math.random() - .5) * 8
+
         const color = colorArray[Math.floor(Math.random() * colorArray.length)]
-        console.log(color)
+
         ballArray.push(new Ball(x, y, radius, vx, vy, color))
     }
 }
