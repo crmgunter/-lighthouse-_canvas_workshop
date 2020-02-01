@@ -24,7 +24,7 @@ While we'll mostly be working with javascript, we need to set up our html file. 
     <title>Document</title>
 </head>
 <body>
-    
+
 </body>
 </html>
 ```
@@ -60,10 +60,9 @@ right click -> Inspect
 If you see the message in your console, you're good to go.
 Let's dive into canvas.
 
-
 ## What is canvas?
 
-Canvas is an HTML element that we can target using Javascript to draw graphics programmatically. We can draw lines, circles, boxes, text, and images. "That's cool", you say, unimpressed, "but we can do that with divs, right?" Sure. You can, but canvas is a whole other beast. With canvas we can animate items, interact with them, and make them interact with each other. A lot of people actually make video games with canvas. 
+Canvas is an HTML element that we can target using Javascript to draw graphics programmatically. We can draw lines, circles, boxes, text, and images. "That's cool", you say, unimpressed, "but we can do that with divs, right?" Sure. You can, but canvas is a whole other beast. With canvas we can animate items, interact with them, and make them interact with each other. A lot of people actually make video games with canvas.
 
 [Someone even built Mario with canvas!](https://openhtml5games.github.io/games-mirror/dist/mariohtml5/main.html)
 
@@ -73,19 +72,17 @@ Canvas is an HTML element that we can target using Javascript to draw graphics p
 
 [Old school 8-bit style art](http://www.effectgames.com/demos/canvascycle/)
 
-
 Cool, sounds straight forward, let's go be Bob Rosses of the internet and try not to make too many happy accidents!
 
 ![Bob Ross](https://media2.giphy.com/media/rYEAkYihZsyWs/giphy.gif)
 
-
 ## Drawing lines and shapes
 
-The first thing we need to do is target the canvas element by its id. This will allow us to select the canvas and tell it what we want to "paint" on it. Think of it as putting a canvas on an easel. 
+The first thing we need to do is target the canvas element by its id. This will allow us to select the canvas and tell it what we want to "paint" on it. Think of it as putting a canvas on an easel.
 
 `const canvas = document.getElementById("myCanvas")`
 
-Then we need to create a drawing object. Think of it as the paint brush. We tell it what to draw, what color we want to paint, where we want to paint, etc. 
+Then we need to create a drawing object. Think of it as the paint brush. We tell it what to draw, what color we want to paint, where we want to paint, etc.
 
 `const ctx = canvas.getContext("2d")`
 
@@ -110,9 +107,9 @@ Cool, let's draw a rectangle.
 
 `ctx.fillRect(0, 0, 150, 75)`
 
-What are those numbers? 
+What are those numbers?
 
-fillRect() takes 4 arguments in this order: 
+fillRect() takes 4 arguments in this order:
 
 `fillRect(x_coordinate, y_coordinate, width, height)`
 
@@ -120,7 +117,7 @@ fillRect() takes 4 arguments in this order:
 
 Canvas is a 2D plane, with an x coordinate and a y coordinate. It's how we can place objects on the canvas so that they know where to go. So in the above example, we set it at 0, 0. Which is the very top left of the canvas. Lets set it to 50, 50 now and see the difference. Play around with some different coordinates and wrap your head around how to position it. Then go ahead and change the width and height and see how that works.
 
-Let's go a little deeper and draw a line. 
+Let's go a little deeper and draw a line.
 
 ```
 ctx.beginPath()
@@ -152,7 +149,7 @@ So we added this line to continue where we left off:
 
 `ctx.lineTo(500, 250)`
 
-It continues the line to the x coordinate of 500, and the y coordinate of 250. 
+It continues the line to the x coordinate of 500, and the y coordinate of 250.
 Let's make stairs.
 
 ```
@@ -169,10 +166,9 @@ ctx.lineTo(900, 650)
 ctx.stroke()
 ```
 
-You can get really into lines and making all kinds of crazy stuff. But we're going to focus on more simple shapes today. 
+You can get really into lines and making all kinds of crazy stuff. But we're going to focus on more simple shapes today.
 
 [For curved lines, look here](https://www.w3schools.com/tags/canvas_beziercurveto.asp)
-
 
 Let's create a circle underneath the rectangle:
 
@@ -190,15 +186,13 @@ the arc() function takes 5 arguments:
 
 `arc(x_coordinate_of_center, y_coordinate_of_center, radius, starting_angle, ending_angle)`
 
-The most important thing for a circle is to make sure the starting angle and ending angle are 0 and 2 * Math.PI. I'm not going to pretend like I understand the geometry behind it. The other values are rather straight forward. Play around with these values and see what kind of shapes you come up with!
+The most important thing for a circle is to make sure the starting angle and ending angle are 0 and 2 \* Math.PI. I'm not going to pretend like I understand the geometry behind it. The other values are rather straight forward. Play around with these values and see what kind of shapes you come up with!
 
 Also notice the difference between strokeStyle and fillStyle, .stroke() and .fill(). One paints lines, the other fills the shape with color. Play around with those values as well.
 
-
-
 ## Gravity
 
-Let's make the ball fall to the "ground". The first thing we need is an animate function. We can call it whatever but to keep it simple we'll call it animate. The animate function is going to bring our ball to life. So we need to define where the ball is going to be painted initially, so an x and a y position. We need to define the x and y velocity, the direction in which it falls, and a speed at which it will fall. Keep in mind, I am not a scientist, so be easy on me on the vocabulary. 
+Let's make the ball fall to the "ground". The first thing we need is an animate function. We can call it whatever but to keep it simple we'll call it animate. The animate function is going to bring our ball to life. So we need to define where the ball is going to be painted initially, so an x and a y position. We need to define the x and y velocity, the direction in which it falls, and a speed at which it will fall. Keep in mind, I am not a scientist, so be easy on me on the vocabulary.
 
 So let's wipe everything out except for the ball and create our animate function and define some variables.
 
@@ -241,16 +235,16 @@ animate()
 There's a lot going on here.
 Let's break it down.
 
-Our x and y variables determine where the ball is painted initially. We set the y velocity equal to 2 which will later update the y position of the ball by 2 as the animation paints the screen. Inside our animate function, we call requestAnimationFrame() and pass in our animate function so that it continuously runs. We're calling our own function in this so that it runs recursively and constantly updates. 
+Our x and y variables determine where the ball is painted initially. We set the y velocity equal to 2 which will later update the y position of the ball by 2 as the animation paints the screen. Inside our animate function, we call requestAnimationFrame() and pass in our animate function so that it continuously runs. We're calling our own function in this so that it runs recursively and constantly updates.
 
-More here: 
+More here:
 [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
 
-We then clear our canvas using clearRect(), clearing the entire thing, starting at 0, 0, and ending at the height and width of our canvas element which is the size of the window height and width. 
+We then clear our canvas using clearRect(), clearing the entire thing, starting at 0, 0, and ending at the height and width of our canvas element which is the size of the window height and width.
 
 Then we draw our circle and pass in our x and y values that we declared earlier as the x and y values that .arc() takes to determine where to render the circle. We have x and y defined as 100 and 350, so our circle is painted there on the canvas.
 
-Finally, we add the velocity y (2) to the y position variable to move the circle down the canvas. 
+Finally, we add the velocity y (2) to the y position variable to move the circle down the canvas.
 
 Now let's stop the ball from falling through the floor. If we add this to the bottom of our animate function, the ball will stop. What we're doing is checking if that if the height of the center of the ball (y position - the radius) is greater than the canvas height, we anchor it to the height of the canvas.
 
@@ -260,7 +254,7 @@ if (y > canvas.height - 50) {
     }
 ```
 
-Let's add some gravity now. This will increase the rate of velocity at which the ball will fall. 
+Let's add some gravity now. This will increase the rate of velocity at which the ball will fall.
 
 Under your vx and vy variables add a gravity variable set to 1:
 
@@ -274,7 +268,7 @@ Cool. Pretty simple so far. Let's go ahead and do some refactoring.
 
 ## Creating a Ball Class
 
-Let's go ahead and refactor this code and create a Ball Class. Later on, it will be handy having a ball class when we want to dynamically generate balls on the fly. 
+Let's go ahead and refactor this code and create a Ball Class. Later on, it will be handy having a ball class when we want to dynamically generate balls on the fly.
 
 So we know for sure our Ball is going to need an x, y, radius, and fill color, so lets go ahead and create the class and pass some values into our constructor.
 
@@ -364,7 +358,6 @@ if (this.y + this.radius > canvas.height) {
 }
 ```
 
-
 ## Creating multiple balls
 
 ```
@@ -394,19 +387,18 @@ function animate() {
 
 Preventing them from starting off the screen
 
-
-
 Create walls on left and right
+
 ```
 if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
             this.vx = -this.vx * bounce
         }
-        
+
         this.x += this.vx
 ```
 
-
 Randomize balls
+
 ```
         let ballArray = [];
 let colors = ["#5B5F97", "#FFC145", "#FFFFFB", "#FF6B6C", "B8B8D1"]
@@ -426,3 +418,38 @@ function init() {
 ```
 
 ## Event listeners
+
+````
+window.addEventListener(('mousemove'), (event) => {
+    mouse.x = event.x
+    mouse.y = event.y
+})
+
+window.addEventListener(('mouseout'), (event) => {
+    mouse.x = undefined
+    mouse.y = undefined
+})
+
+if (this.x > mouse.x) {
+                this.x -= 1
+            }
+
+            if (this.x < mouse.x) {
+                this.x += 1
+            }
+
+            if (this.y > mouse.y) {
+                this.y -= 1
+            }
+
+            if (this.y < mouse.y) {
+                this.y += 1
+            }
+
+            this.radius += 1
+            if (this.radius < maxRadius) {
+                this.radius += 1
+            }
+        }
+        ```
+````
