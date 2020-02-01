@@ -62,10 +62,15 @@ const colorArray = [
 
 const init = () => {
     for (let i = 0; i < 500; i++) {
-        const radius = Math.ceil(Math.random() * 5)
+        const radius = Math.ceil(Math.random() * 15)
         const x = Math.random() * canvas.width
         const y = Math.random() * canvas.height
-        ballArray.push(new Ball(x, y, radius, 5, 5, "orange"))
+        const vx = (Math.random() -.5) * 8
+        const vy = (Math.random() -.5) * 8
+        console.log(vx, vy)
+        const color = colorArray[Math.floor(Math.random() * colorArray.length)]
+        console.log(color)
+        ballArray.push(new Ball(x, y, radius, vx, vy, color))
     }
 }
 
